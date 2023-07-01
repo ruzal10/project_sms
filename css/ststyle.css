@@ -1,0 +1,24 @@
+/* * For Admin dashboard */
+body {
+ 
+  margin: 0;
+  padding: 0;
+  /* background-color: ; */
+}
+
+.dlabel {
+  color: black;
+  padding: 10px 10px;
+  text-align: start;
+  font-size: 40px;
+  border-bottom: solid blue 2px;
+}
+
+.thead-main {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  margin-left: 18%;
+}
+
+/* css for table  */
