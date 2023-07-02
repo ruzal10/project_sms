@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2023 at 07:11 AM
+-- Generation Time: Jul 02, 2023 at 08:04 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -79,35 +79,29 @@ CREATE TABLE `feedback` (
 
 INSERT INTO `feedback` (`id`, `name`, `feedback`) VALUES
 (2, 'kuns', 'hiiiiii'),
-(3, 'admin', 'yohohohohohoho');
+(4, 'kuns', 'hello');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `results`
+-- Table structure for table `notice`
 --
 
-CREATE TABLE `results` (
-  `rid` int(100) NOT NULL,
-  `sid` int(100) NOT NULL,
-  `name` varchar(999) NOT NULL,
-  `faculty` varchar(100) NOT NULL,
-  `semyear` varchar(100) NOT NULL,
-  `ayear` varchar(100) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `subject1` varchar(100) NOT NULL,
-  `subject2` varchar(100) NOT NULL,
-  `subject3` varchar(100) NOT NULL,
-  `subject4` varchar(100) NOT NULL,
-  `subject5` varchar(100) NOT NULL,
-  `subject6` varchar(100) NOT NULL,
-  `mask1` varchar(100) NOT NULL,
-  `mask2` varchar(100) NOT NULL,
-  `mask3` varchar(100) NOT NULL,
-  `mask4` varchar(100) NOT NULL,
-  `mask5` varchar(100) NOT NULL,
-  `mask6` varchar(100) NOT NULL
+CREATE TABLE `notice` (
+  `notice_id` int(11) NOT NULL,
+  `date` date DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `audience` varchar(255) DEFAULT NULL,
+  `expiry_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `notice`
+--
+
+INSERT INTO `notice` (`notice_id`, `date`, `title`, `description`, `audience`, `expiry_date`) VALUES
+(0, '2023-07-03', 'form', 'new form', 'bca forth sem', '2023-07-12');
 
 -- --------------------------------------------------------
 
@@ -222,10 +216,10 @@ ALTER TABLE `feedback`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `results`
+-- Indexes for table `notice`
 --
-ALTER TABLE `results`
-  ADD PRIMARY KEY (`rid`);
+ALTER TABLE `notice`
+  ADD PRIMARY KEY (`notice_id`);
 
 --
 -- Indexes for table `semester`
@@ -275,7 +269,7 @@ ALTER TABLE `faculty`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `semester`
