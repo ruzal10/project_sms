@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 01, 2023 at 08:31 PM
+-- Generation Time: Jul 02, 2023 at 07:11 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -58,7 +58,7 @@ CREATE TABLE `faculty` (
 
 INSERT INTO `faculty` (`id`, `faculty_name`) VALUES
 (1, 'bca'),
-(4, 'bim'),
+(5, 'bim'),
 (2, 'csit');
 
 -- --------------------------------------------------------
@@ -126,7 +126,8 @@ CREATE TABLE `semester` (
 
 INSERT INTO `semester` (`id`, `semester_name`) VALUES
 (3, '1st semster'),
-(2, '2nd semester');
+(2, '2nd Semester'),
+(4, '4th semester');
 
 -- --------------------------------------------------------
 
@@ -165,8 +166,9 @@ INSERT INTO `student` (`sid`, `sname`, `address`, `mnumber`, `email`, `faculty`,
 
 CREATE TABLE `subject` (
   `id` int(11) NOT NULL,
-  `subjectname` varchar(50) NOT NULL,
-  `credithour` int(20) NOT NULL,
+  `subjectcode` varchar(100) DEFAULT NULL,
+  `subjectname` varchar(50) DEFAULT NULL,
+  `credithour` int(20) DEFAULT NULL,
   `faculty` varchar(50) DEFAULT NULL,
   `semester` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -175,8 +177,8 @@ CREATE TABLE `subject` (
 -- Dumping data for table `subject`
 --
 
-INSERT INTO `subject` (`id`, `subjectname`, `credithour`, `faculty`, `semester`) VALUES
-(1, 'DSA', 3, 'bca', '1st semster');
+INSERT INTO `subject` (`id`, `subjectcode`, `subjectname`, `credithour`, `faculty`, `semester`) VALUES
+(4, 'bca2024', 'Math', 6, 'bca', '1st semster');
 
 -- --------------------------------------------------------
 
@@ -187,11 +189,11 @@ INSERT INTO `subject` (`id`, `subjectname`, `credithour`, `faculty`, `semester`)
 CREATE TABLE `teachers` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `address` varchar(200) NOT NULL,
+  `address` varchar(100) NOT NULL,
   `mobile` varchar(20) NOT NULL,
   `gmail` varchar(100) NOT NULL,
   `main_subject` varchar(100) NOT NULL,
-  `qualification` varchar(200) NOT NULL,
+  `qualification` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -244,8 +246,8 @@ ALTER TABLE `student`
 --
 ALTER TABLE `subject`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `faculty` (`faculty`),
-  ADD UNIQUE KEY `semester` (`semester`);
+  ADD KEY `semester` (`semester`),
+  ADD KEY `faculty` (`faculty`);
 
 --
 -- Indexes for table `teachers`
@@ -267,7 +269,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `faculty`
 --
 ALTER TABLE `faculty`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -279,19 +281,19 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `semester`
 --
 ALTER TABLE `semester`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `subject`
 --
 ALTER TABLE `subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -301,8 +303,8 @@ ALTER TABLE `teachers`
 -- Constraints for table `subject`
 --
 ALTER TABLE `subject`
-  ADD CONSTRAINT `subject_ibfk_1` FOREIGN KEY (`faculty`) REFERENCES `faculty` (`faculty_name`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `subject_ibfk_2` FOREIGN KEY (`semester`) REFERENCES `semester` (`semester_name`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `subject_ibfk_1` FOREIGN KEY (`semester`) REFERENCES `semester` (`semester_name`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `subject_ibfk_2` FOREIGN KEY (`faculty`) REFERENCES `faculty` (`faculty_name`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
