@@ -93,7 +93,7 @@
 
         <div class="thead-main">
             <div class="dlabel">
-                My Profile
+                Feedback
             </div>
             <div class="outer">
                 <div class="container">

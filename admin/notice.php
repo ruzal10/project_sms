@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Teachers Table</title>
+    <title>Notice</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -23,28 +23,9 @@
             border: 1px solid transparent;
             border-radius: 4px;
             color: #fff;
-            background-color: red;
             border-color: #2e6da4;
             text-decoration: none;
-        }
-
-        .button2 {
-            display: inline-block;
-            padding: 6px 12px;
-            margin-bottom: 0;
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 1.42857143;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: middle;
-            cursor: pointer;
-            border: 1px solid transparent;
-            border-radius: 4px;
-            color: #fff;
             background-color: lightseagreen;
-            border-color: #2e6da4;
-            text-decoration: none;
         }
 
         .container {
@@ -111,26 +92,19 @@
             margin-bottom: 10px;
         }
 
-        .popup-content input {
+        .popup-content input,
+        textarea {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
 
-        .popup-content input[type="submit"] {
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #4caf50;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
+        .popup-content input[type="submit"]:hover {
+            background-color: #45a049;
             cursor: pointer;
         }
 
-        .popup-content input[type="submit"]:hover {
-            background-color: #45a049;
-        }
         .close-div {
             display: flex;
             justify-content: space-between;
@@ -155,44 +129,47 @@
         <?php include('sidebar.php'); ?>
         <div class="thead-main">
             <div class="dlabel">
-                Our Teachers
+                Notices
             </div>
             <div class="dlabel" style="border-bottom:none;">
-                <button class="button2" onclick="openPopup()">Add Teacher</button>
+                <button class="button" onclick="openPopup()">Add New Notice</button>
             </div>
             <div class="table-responsive">
-                <table id="teacherTable" class="table table-striped">
+                <table id="noticeTable" class="table table-striped">
                     <thead>
                         <tr class="th-tr">
-                            <th>Name</th>
-                            <th>Address</th>
-                            <th>Mobile No.</th>
-                            <th>Gmail</th>
-                            <th>Main Subject</th>
-                            <th>Qualification</th>
+                            <th>Date</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Audience</th>
+                            <th>Expiry Date</th>
                             <th>Action</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         <?php
-                        $sql = "SELECT * FROM teachers";
+                        $sql = "SELECT * FROM Notice";
                         $result = $conn->query($sql);
 
                         while ($row = $result->fetch_assoc()) {
                         ?>
                             <tr>
-                                <td><?php echo $row['name'] ?></td>
-                                <td><?php echo $row['address'] ?></td>
-                                <td><?php echo $row['mobile']; ?></td>
-                                <td><?php echo $row['gmail']; ?></td>
-                                <td><?php echo $row['main_subject']; ?></td>
-                                <td><?php echo  $row['qualification']; ?></td>
-                                <td><a href="deleteteacher.php?id=<?php echo $row['id'] ?>"><button class="button" onclick="return confirm('Are you sure to delete?')">Delete </button></a></td>
+                                <td><?php echo $row['date']; ?></td>
+                                <td><?php echo $row['title']; ?></td>
+                                <td><?php echo $row['description']; ?></td>
+                                <td><?php echo $row['audience']; ?></td>
+                                <td><?php echo $row['expiry_date']; ?></td>
+                                <td>
+                                    <a href="editnotice.php?id=<?php echo $row['notice_id']; ?>" class="button">Edit</a>
+                                    <a href="deletenotice.php?id=<?php echo $row['notice_id']; ?>" class="button" style="background-color: red;" onclick="return confirm('Are you sure you want to delete this notice?')">Delete</a>
+                                </td>
                             </tr>
                         <?php
                         }
                         ?>
                     </tbody>
+
                 </table>
             </div>
         </div>
@@ -201,46 +178,35 @@
     <div class="popup-container" id="popupContainer">
         <div class="popup-content">
             <div class="close-div">
-                <span>Add New Teacher</span>
+                <span>Add New Notice</span>
                 <span class="close" onclick="closePopup()"><i class="ri-close-line"></i></span>
             </div>
             <div id="registration-form">
                 <div class="fieldset">
                     <form action="" method="post" data-validate="parsley">
                         <div class="row">
-                            <label for="tname">Name</label>
-                            <input type="text" placeholder="Enter Name" name="tname" id="tname" required>
+                            <label for="date">Date</label>
+                            <input type="date" name="date" id="date" required>
                         </div>
                         <div class="row">
-                            <label for="taddress">Address</label>
-                            <input type="text" placeholder="Enter Address" name="taddress" id="taddress" required>
+                            <label for="title">Title</label>
+                            <input type="text" placeholder="Enter Title" name="title" id="title" required>
                         </div>
                         <div class="row">
-                            <label for="tmobile">Mobile No.</label>
-                            <input type="number" placeholder="Enter Mobile Number" name="tmobile" id="tmobile" required>
+                            <label for="description">Description</label>
+                            <textarea name="description" id="description" placeholder="Enter Description" required></textarea>
                         </div>
                         <div class="row">
-                            <label for="tgmail">Gmail</label>
-                            <input type="email" placeholder="Enter Gmail" name="tgmail" id="tgmail" required>
+                            <label for="audience">Audience</label>
+                            <input type="text" placeholder="Enter Audience" name="audience" id="audience" required>
                         </div>
                         <div class="row">
-                            <label for="tsubject">Main Subject</label>
-                            <input type="text" placeholder="Enter Main Subject" name="tsubject" id="tsubject" required>
+                            <label for="expiry_date">Expiry Date</label>
+                            <input type="date" name="expiry_date" id="expiry_date" required>
                         </div>
-                        <div class="row">
-                            <label for="tedu">Qualification</label>
-                            <input type="text" placeholder="Enter Qualification" name="tedu" id="tedu" required>
-                        </div>
-                        <div class="row">
-                            <label for="username">Username</label>
-                            <input type="text" placeholder="Enter Username" name="username" id="username" required>
-                        </div>
-                        <div class="row">
-                            <label for="password">Password</label>
-                            <input type="password" placeholder="Enter Password" name="password" id="password" required>
-                        </div>
-                        <input class="btn" type="submit" value="Register">
+                        <input style="color:#fff; margin-top:10px; background-color: #4CAF50;" class="btn" type="submit" value="Add">
                     </form>
+
                 </div>
             </div>
         </div>
@@ -248,7 +214,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#teacherTable').DataTable();
+            $('#noticeTable').DataTable();
         });
 
         function openPopup() {
@@ -272,23 +238,22 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the form data
-    $tname = $_POST['tname'];
-    $taddress = $_POST['taddress'];
-    $tmobile = $_POST['tmobile'];
-    $tgmail = $_POST['tgmail'];
-    $tsubject = $_POST['tsubject'];
-    $tedu = $_POST['tedu'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $date = $_POST['date'];
+    $title = $_POST['title'];
+    $description = $_POST['description'];
+    $audience = $_POST['audience'];
+    $expiry_date = $_POST['expiry_date'];
 
-    $query = "INSERT INTO teachers (name, address, mobile, gmail,   main_subject, qualification, username, password) VALUES ('$tname', '$taddress', '$tmobile', '$tgmail', '$tsubject', '$tedu', '$username', '$password')";
+    // Insert the notice into the database
+    $query = "INSERT INTO Notice (date, title, description, audience, expiry_date) VALUES ('$date', '$title', '$description', '$audience', '$expiry_date')";
+
+    // Execute the query
     if (mysqli_query($conn, $query)) {
-
-        echo '<script>alert("Teacher Added Sucessfully")</script>';
-        echo "<script>window.location.href='teacher.php'</script>";
+        echo '<script>alert("Notice Added Successfully")</script>';
+        echo "<script>window.location.href='notice.php'</script>";
     } else {
-        echo '<script>alert("Error please try again.")</script>';
-        echo "<script>window.location.href='teacher.php'</script>";
+        echo '<script>alert("Error. Please try again.")</script>';
+        echo "<script>window.location.href='notice.php'</script>";
     }
 }
 $conn->close();

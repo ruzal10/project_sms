@@ -83,7 +83,7 @@
                 Student Registeration Details
             </div>
             <div class="dlabel" style="border-bottom:none;">
-                <a href="astudent.php" class="button2">View Students Registration Application</a>
+                <a href="registerstudent.php" class="button2">View Students Registration Application</a>
             </div>
             <div class="table-responsive">
                 <table id="studentTable" class="table table-striped">

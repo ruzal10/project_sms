@@ -99,7 +99,7 @@ if (!$conn) {
   <div class="sidebar-menu">
     <ul>
       <li><a href="admindashboard.php"><i class="ri-home-2-line"></i>Dashboard</a></li>
-      <li><a href="viewstudent.php"><i class="ri-user-3-line"></i>Student</a></li>
+      <li><a href="student.php"><i class="ri-user-3-line"></i>Student</a></li>
       <li><a href="subject.php"><i class="ri-book-open-line"></i>Subject</a></li>
       <li><a href="teacher.php"><i class="ri-user-2-line"></i>Teacher</a></li>
       <li><a href="faculty.php"><i class="ri-file-text-line"></i>Faculty</a></li>
