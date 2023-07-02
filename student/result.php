@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Akshar:wght@300;400&family=Merriweather&family=Ms+Madi&family=Roboto:wght@500&display=swap" rel="stylesheet">
     <title>Student dashboard</title>
     <style>
+      .container {
+            display: flex;
+            padding: 10px;
+        }
+
         .dlabel {
             color: black;
             padding: 10px 10px;
@@ -21,7 +23,8 @@
         .thead-main {
             text-align: center;
             height: 100%;
-            margin-left: 18%;
+            width: 100%;
+            margin-left: 175px;
         }
 
         table {
@@ -53,7 +56,6 @@
             <div class="dlabel">
                 My Result
             </div>
-
             <div>
                 <table>
                     <thead>

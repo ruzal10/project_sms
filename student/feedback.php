@@ -5,10 +5,9 @@
     <title>Feedback Form</title>
 
     <style>
-        body {
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
+        .container {
+            display: flex;
+            padding: 10px;
         }
 
         .dlabel {
@@ -22,16 +21,16 @@
         .thead-main {
             text-align: center;
             height: 100%;
-            margin-left: 18%;
+            width: 100%;
+            margin-left: 175px;
         }
 
         .outer {
             display: flex;
-            justify-content: center;
-            align-items: center;
+            margin-left: 300px;
         }
 
-        .container {
+        .fcontainer {
             width: 50%;
             max-width: 600px;
             margin-top: 50px;
@@ -96,12 +95,12 @@
                 Feedback
             </div>
             <div class="outer">
-                <div class="container">
+                <div class="fcontainer">
                     <h1>Feedback Form</h1>
                     <form action="" method="post">
                         <div class="form-group">
                             <label for="name">Name:</label>
-                            <input type="text" id="name" name="name" required>
+                            <input type="text" id="name" name="name" value="<?php echo $student ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="message">Message:</label>
@@ -113,22 +112,16 @@
             </div>
         </div>
     </div>
-    <?php
+</body>
+</html>
+<?php
     if (isset($_POST['submit'])) {
         $name = $_POST['name'];
         $feedback = $_POST['message'];
-
-
         $sql = "INSERT INTO feedback(name,feedback)VALUES('$name','$feedback')";
         $result = mysqli_query($conn, $sql);
         if ($result) {
-    ?>
-            <script>
-                alert("Feedback add successfully");
-                window.open("studentdashboard.php");
-            </script>
-    <?php }
-    } ?>
-</body>
-
-</html>
+            echo '<script> alert("Feedback add successfully");</script>';
+            echo '<script> window.location.href = "studentdashboard.php";</script>';
+    } 
+}?>
