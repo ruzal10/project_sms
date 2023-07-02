@@ -44,59 +44,85 @@
             border: 1px solid transparent;
             border-radius: 4px;
             color: #fff;
-            background-color:#29c493;
+            background-color: #29c493;
             text-decoration: none;
         }
+
+        .tbldiv {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        #facultyTable,
+        #semTable {
+            padding: 10px;
+        }
+
         .popup-container {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
 
-.popup-content {
-  background-color: #fefefe;
-  margin: 10% auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  width: 80%;
-  max-width: 500px;
-  border-radius: 5px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
+        .popup-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            width: 50%;
+            max-width: 500px;
+            height: 250px;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
 
-.popup-content h4 {
-  margin-top: 15px;
-}
+        .popup-content h4 {
+            margin-top: 15px;
+        }
 
-.popup-content input[type="text"],
-.popup-content input[type="number"],
-.popup-content input[type="email"],
-.popup-content input[type="password"] {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
+        .popup-content input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
 
-.popup-content input[type="submit"] {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
+        .popup-content input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-.popup-content input[type="submit"]:hover {
-  background-color: #45a049;
-}
+        .popup-content input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .close-div {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .close {
+            padding: 5px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .close:hover {
+            background-color: lightslategray;
+            transition: 0.5s;
+        }
     </style>
     <script>
         function openPopup() {
@@ -140,7 +166,7 @@
                     Our Faculties
                 </div>
 
-                <div>
+                <div class="tbldiv">
                     <table id="facultyTable">
                         <thead>
                             <tr>
@@ -160,8 +186,8 @@
                                     <td><?php echo $frow['id']; ?></td>
                                     <td><?php echo $frow['faculty_name']; ?></td>
                                     <td>
-                                        <button class="btn">Edit</button>
-                                        <button class="btn" style="background-color: red;">Delete</button>
+                                        <a href="editfaculty.php?id=<?php echo $frow['id']; ?>" class="btn">Edit</a>
+                                        <a onclick="return confirm('Are you sure want to delete?')" class="btn" style="background-color: red;" href="deletefacultsem.php?fid=<?php echo $frow['id'];  ?>">Delete</a>
                                     </td>
                                 </tr>
                             <?php
@@ -181,7 +207,7 @@
                     Our Semesters
                 </div>
 
-                <div>
+                <div class="tbldiv">
                     <table id="semTable">
                         <thead>
                             <tr>
@@ -201,8 +227,8 @@
                                     <td><?php echo $srow['id']; ?></td>
                                     <td><?php echo $srow['semester_name']; ?></td>
                                     <td>
-                                        <button class="btn">Edit</button>
-                                        <button class="btn" style="background-color: red;">Delete</button>
+                                        <a href="editsem.php?id=<?php echo $srow['id']; ?>" class="btn">Edit</a>
+                                        <a onclick="return confirm('Are you sure want to delete?')" class="btn" style="background-color: red;" href="deletefacultsem.php?sid=<?php echo $srow['id'];  ?>">Delete</a>
                                     </td>
                                 </tr>
                             <?php
@@ -223,7 +249,10 @@
     </div>
     <div class="popup-container" id="popupContainer">
         <div class="popup-content">
-            <span onclick="closePopup()"><i class="ri-close-line"></i></span>
+            <div class="close-div">
+                <span>Add Semester</span>
+                <span class="close" onclick="closePopup()"><i class="ri-close-line"></i></span>
+            </div>
             <div>
                 <form action="" method="post">
                     <label for="sem">Enter Semester/Year Name :</label>
@@ -236,7 +265,11 @@
 
     <div class="popup-container" id="popupContainer2">
         <div class="popup-content">
-            <span onclick="closePopup2()"><i class="ri-close-line"></i></span>
+            <div class="close-div">
+                <span>Add Faculty</span>
+                <span class="close" onclick="closePopup2()"><i class="ri-close-line"></i></span>
+
+            </div>
             <div>
                 <form action="" method="post">
                     <label for="sem">Enter Faculty :</label>
